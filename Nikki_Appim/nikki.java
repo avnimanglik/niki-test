@@ -1,4 +1,4 @@
-package Nikki_Appium;
+package proj1;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -15,7 +15,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import junit.framework.Assert;
 
-
+@SuppressWarnings("deprecation")
 public class niki 
 {
 		private static AndroidDriver<AndroidElement> driver; 
@@ -72,7 +72,10 @@ public class niki
 		public void menu () throws Exception 	
 		{
 			driver.findElement(By.id("com.techbins.niki.beta:id/nikiMenuBlink")).click();
-			driver.findElement(By.className("android.widget.RelativeLayout"));
+			if (driver.findElement(By.className("android.widget.RelativeLayout"))!=null)
+				{
+				System.out.println("Menu Bar Opened");
+				}
 			driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		}
 
@@ -84,7 +87,8 @@ public class niki
 			driver.findElement(By.id("com.techbins.niki.beta:id/edtTxtInputMessage")).sendKeys("Hello Niki");
 			driver.findElement(By.id("com.techbins.niki.beta:id/btnSend")).click();
 			driver.manage().timeouts().implicitlyWait(3,TimeUnit.SECONDS);
-			driver.findElement(By.id("com.techbins.niki.beta:id/typingText"));
+			WebElement elm=driver.findElement(By.id("com.techbins.niki.beta:id/typingText"));
+			Assert.assertEquals(elm.getText(),"Niki is typing","Either element was not present or Text did not match");
 			driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);	
 		}
 
